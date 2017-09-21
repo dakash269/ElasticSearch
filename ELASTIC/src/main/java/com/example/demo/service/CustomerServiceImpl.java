@@ -36,5 +36,8 @@ public class CustomerServiceImpl implements CustomerService {
     public List<Customer> findByLastName(String lastName) {
         return customerRepository.findByLastName(lastName);
     }
+    public List<Customer> findByFirstName(String firstName) {
+        return customerRepository.findByFirstName(firstName);
+    }
 
 }

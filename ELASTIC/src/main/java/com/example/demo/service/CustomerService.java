@@ -17,4 +17,6 @@ public interface CustomerService {
     Iterable<Customer> findAll();
 
     List<Customer> findByLastName(String lastName);
+
+    List<Customer> findByFirstName(String firstName);
 }

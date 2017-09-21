@@ -8,6 +8,8 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
+import java.util.List;
+
 @SpringBootApplication
 public class DemoApplication implements CommandLineRunner {
    @Autowired
@@ -21,14 +23,6 @@ public class DemoApplication implements CommandLineRunner {
 	public void run(String... args) throws Exception {
 		try {
              indexService.bulkIndex();
-//			customerService.save(new Customer("1","Jack", "Smith"));
-//			customerService.save(new Customer("2","Ram", "Johnson"));
-//			customerService.save(new Customer("3","Bharat", "Smith"));
-//			customerService.save(new Customer("4","Laxman", "Williams"));
-//			Iterable<Customer> customers = customerService.findAll();
-//			for (Object aCustomers : customers) {
-//				System.out.println(aCustomers);
-//			}
 		}
 		catch (Exception e){
 			System.out.println(e);

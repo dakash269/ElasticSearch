@@ -4,7 +4,7 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.elasticsearch.annotations.Document;
 import java.io.Serializable;
 
-@Document(indexName = "example.demo", type = "customers", shards = 1, replicas = 0)
+@Document(indexName = "customer_index", type = "customer_type", shards = 1, replicas = 0)
 public class Customer implements Serializable {
 
 	@Id
@@ -33,7 +33,7 @@ public class Customer implements Serializable {
 		return firstName;
 	}
 
-	public void setFirstName(String title) {
+	public void setFirstName(String firstName) {
 		this.firstName = firstName;
 	}
 

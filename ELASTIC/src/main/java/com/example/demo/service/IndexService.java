@@ -1,6 +1,7 @@
 package com.example.demo.service;
 
 import com.example.demo.model.Customer;
+import com.google.gson.Gson;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.elasticsearch.core.ElasticsearchTemplate;
 import org.springframework.data.elasticsearch.core.query.IndexQuery;
@@ -15,7 +16,7 @@ public class IndexService {
     private  static  final  String CUSTOMER_INDEX_TYPE = "customer_type";
     @Autowired
     ElasticsearchTemplate elasticsearchTemplate;
-    public long bulkIndex() throws Exception {
+    public  void bulkIndex() throws Exception {
         int counter = 0;
         try {
             if (!elasticsearchTemplate.indexExists(CUSTOMER_INDEX_NAME)) {
@@ -23,6 +24,7 @@ public class IndexService {
             }
              Gson gson = new Gson();
             List<IndexQuery> queries = new ArrayList<IndexQuery>();
+
             List<Customer> customers = createTestData();
             for (Customer customer : customers) {
                 IndexQuery indexQuery = new IndexQuery();
@@ -31,30 +33,23 @@ public class IndexService {
                 indexQuery.setIndexName(CUSTOMER_INDEX_NAME);
                 indexQuery.setType(CUSTOMER_INDEX_TYPE);
                 queries.add(indexQuery);
-//                if (counter % Constants.INDEX_COMMIT_SIZE == 0) {
-                    elasticsearchTemplate.bulkIndex(queries);
-                    queries.clear();
-                    System.out.println("bulkIndex counter : " + counter);
-//                }
                 counter++;
             }
-            if (queries.size() > 0) {
-                elasticsearchTemplate.bulkIndex(queries);
-            }
-//            elasticsearchTemplate.refresh(CUSTOMER_INDEX_NAME, true);
-            System.out.println("bulkIndex completed.");
+            elasticsearchTemplate.bulkIndex(queries);
+            queries.clear();
         } catch (Exception e) {
             System.out.println("IndexerService.bulkIndex e;" + e.getMessage());
             throw e;
         }
-        return -1;
-    }
+    };
     private List<Customer> createTestData() {
         List<Customer> customers = new ArrayList<Customer>();
-        customers.add(new Customer("1","Jack", "Smith"));
-        customers.add(new Customer("2","Ram", "Johnson"));
-        customers.add(new Customer("3","Bharat", "Smith"));
-        customers.add(new Customer("4","Laxman", "Williams"));
+        customers.add(new Customer("34","ab", "Smith"));
+        customers.add(new Customer("35","cd", "Johnson"));
+        customers.add(new Customer("36","ef", "Smith"));
+        customers.add(new Customer("37","gh", "Williams"));
+        customers.add(new Customer("38","ij", "po"));
+        customers.add(new Customer("39","kl", "pio"));
         return customers;
     }
 }
